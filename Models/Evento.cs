@@ -13,7 +13,7 @@ public class Evento
 
     public int UsuarioId { get; set; }
 
-    public Usuario Usuario { get; set; }
+    public Usuario ?Usuario { get; set; }
 
     public DateTime CriadoEm { get; set; } = DateTime.Now;
 

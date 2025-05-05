@@ -21,7 +21,7 @@ builder.Services.AddDbContext<AppDataContext>
     (options => options.UseMySql(connectionString, 
     ServerVersion.AutoDetect(connectionString)));
 builder.Services.
-    AddScoped<IProdutoRepository, ProdutoRepository>();
+    AddScoped<IEventoRepository, EventoRepository>();
 builder.Services.
     AddScoped<IUsuarioRepository, UsuarioRepository>();
 

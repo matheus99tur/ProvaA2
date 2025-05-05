@@ -1,6 +1,7 @@
 using System;
 using API.Data;
 using API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -15,6 +16,7 @@ public class EventosController : ControllerBase
         _eventoRepository = eventoRepository;
     }
     [HttpPost("cadastrar")]
+    //[Authorize(Roles = "adiministrador")]
     public IActionResult Cadastrar([FromBody] Evento evento)
     {
         
@@ -26,5 +28,8 @@ public class EventosController : ControllerBase
     {
         return Ok(_eventoRepository.Listar());
     }
+
+
+    
 }
 

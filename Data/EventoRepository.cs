@@ -3,21 +3,21 @@ using API.Models;
 
 namespace API.Data;
 
-public class ProdutoRepository : IProdutoRepository
+public class EventoRepository : IEventoRepository
 {
     private readonly AppDataContext _context;
-    public ProdutoRepository (AppDataContext context)
+    public EventoRepository (AppDataContext context)
     {
         _context = context;
     }
-    public void Cadastrar(Produto produto)
+    public void Cadastrar(Evento evento)
     {
-        _context.Produtos.Add(produto);
+        _context.Eventos.Add(evento);
         _context.SaveChanges();
     }
 
-    public List<Produto> Listar()
+    public List<Evento> Listar()
     {
-       return _context.Produtos.ToList();
+       return _context.Eventos.ToList();
     }
 }

@@ -23,6 +23,7 @@ public class UsuarioController : ControllerBase
     [HttpPost("cadastrar")]
     public IActionResult Cadastrar([FromBody] Usuario usuario)
     {
+        //var email = User.Identity?.Name;
         _usuarioRepository.Cadastrar(usuario);
         return Created("", usuario);
     }
@@ -48,6 +49,7 @@ public class UsuarioController : ControllerBase
         return Ok(_usuarioRepository.Listar());
     }
 
+    [ApiExplorerSettings(IgnoreApi = true)]
     public string GerarToken(Usuario usuario)
     {
         var claims = new[]
@@ -56,9 +58,16 @@ public class UsuarioController : ControllerBase
             new Claim(ClaimTypes.Role, usuario.Permissao.ToString())
         };
 
-        var chave = Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]);
-        var assinatura = new SigningCredentials(new SymmetricSecurityKey(chave), SecurityAlgorithms.HmacSha256);
-        var token = new JwtSecurityToken(claims: claims, expires: DateTime.Now.AddSeconds(30), signingCredentials: assinatura);
-        return new JwtSecurityTokenHandler().WriteToken(token);
+
+         var chave = Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]!);
+          var credenciais = new SigningCredentials(
+              new SymmetricSecurityKey(chave), SecurityAlgorithms.HmacSha256);
+
+          var token = new JwtSecurityToken(
+              claims: claims,
+              expires: DateTime.UtcNow.AddHours(1),
+              signingCredentials: credenciais);
+
+          return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }

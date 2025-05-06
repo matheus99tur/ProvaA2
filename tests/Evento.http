@@ -2,21 +2,12 @@
 
 POST {{url_base}}/cadastrar
 Content-Type: application/json
-Authorization:
 
 {
     "nome" : "Diamante"
 }
 
 
-### Login
-POST {{url_base}}/login
-Content-Type: application/json
-
-{
-    "email" : "Teste2",
-    "senha" : "1234"
-}
-
 ### Listar Evento
 GET {{url_base}}/listar
+Authorization:

@@ -16,7 +16,7 @@ public class EventosController : ControllerBase
         _eventoRepository = eventoRepository;
     }
     [HttpPost("cadastrar")]
-    //[Authorize(Roles = "adiministrador")]
+    [Authorize(Roles = "adiministrador")]
     public IActionResult Cadastrar([FromBody] Evento evento)
     {
         
